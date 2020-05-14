@@ -19,6 +19,8 @@ package object tree {
       s"actor-tree-builder-$correlation"
     )
     builder ! Build
-    after(timeout.duration, system.scheduler)((builder ? GetTree).mapTo[ActorTree])
+    val result = after(timeout.duration, system.scheduler)((builder ? GetTree).mapTo[ActorTree])
+    result.onComplete(_ => system.stop(builder))
+    result
   }
 }
