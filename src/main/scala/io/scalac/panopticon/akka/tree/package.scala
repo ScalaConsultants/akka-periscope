@@ -15,7 +15,7 @@ package object tree {
   def build(system: ActorSystem)(implicit ec: ExecutionContext, timeout: Timeout): Future[ActorTree] = {
     val correlation = Instant.now().toEpochMilli
     val builder = system.actorOf(
-      Props[ActorTreeBuilder](new ActorTreeBuilder(correlation)),
+      Props(new ActorTreeBuilder(correlation)),
       s"actor-tree-builder-$correlation"
     )
     builder ! Build
