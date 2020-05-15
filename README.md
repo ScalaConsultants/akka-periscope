@@ -81,14 +81,16 @@ import io.scalac.panopticon.akka.tree.ActorTreeRoute
 import io.scalac.panopticon.akka.counter.ActorCountRoute
 import akka.actor.ActorSystem
 import akka.http.scaladsl.server.Directives._
+import scala.concurrent.ExecutionContext
 
 val system: ActorSystem = ???
+implicit val ec: ExecutionContext = system.dispatcher
 
 pathPrefix("actor-tree") {
-  ActorTreeRoute(system)(system.dispatcher)
+  ActorTreeRoute(system)
 } ~
 pathPrefix("actor-count") {
-  ActorCountRoute(system)(system.dispatcher)
+  ActorCountRoute(system)
 }
 ```
 
