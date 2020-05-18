@@ -37,7 +37,7 @@ class OverwhelmedActorParent extends Actor {
 
 class OverwhelmedActor extends Actor {
   def receive: Receive = {
-    case () => Thread.sleep(500)
+    case () => Thread.sleep(5000)
   }
   override def preStart(): Unit =
     self ! ()
