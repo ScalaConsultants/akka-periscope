@@ -4,7 +4,7 @@
 
 Akka actor tree collector plugin.
 
-Provides akka-related data [Panopticon monitoring tool](https://github.com/ScalaConsultants/panopticon-tui), but can be used for general purposes as well.
+Provides akka-related data for [Panopticon monitoring tool](https://github.com/ScalaConsultants/panopticon-tui), but can be used for general purposes as well.
 
 ## What is this?
 
