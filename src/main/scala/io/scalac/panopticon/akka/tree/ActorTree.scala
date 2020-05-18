@@ -27,3 +27,7 @@ final case class ActorTree(nodes: Map[String, ActorTree]) extends AnyVal {
         }
         .init + "}"
 }
+
+object ActorTree {
+  val empty: ActorTree = ActorTree(Map.empty)
+}
