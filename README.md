@@ -1,4 +1,7 @@
 # akka-actor-tree
+
+![CI](https://github.com/ScalaConsultants/akka-actor-tree/workflows/Scala%20CI/badge.svg)
+
 Akka actor tree collector plugin.
 
 Provides akka-related data [Panopticon monitoring tool](https://github.com/ScalaConsultants/panopticon-tui), but can be used for general purposes as well.
