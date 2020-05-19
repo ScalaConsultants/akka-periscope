@@ -9,7 +9,6 @@ import org.scalatest.flatspec.AnyFlatSpecLike
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{ Milliseconds, Span }
 import io.scalac.panopticon.akka._
-import io.scalac.panopticon.akka.counter.count
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 
