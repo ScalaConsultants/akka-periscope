@@ -11,5 +11,5 @@ private[tree] final class MutableActorTree(val nodes: mutable.Map[String, Mutabl
         n.nodes.getOrElseUpdate(segment, new MutableActorTree(mutable.Map.empty))
     }
 
-  def toActorTree: ActorTree = ActorTree(nodes.view.mapValues(_.toActorTree).toMap)
+  def toActorTree: ActorTree = ActorTree(nodes.map { case (k, v) => k -> v.toActorTree }.toMap)
 }
