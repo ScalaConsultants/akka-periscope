@@ -40,5 +40,5 @@ class OverwhelmedActor extends Actor {
     case () => Thread.sleep(5000)
   }
   override def preStart(): Unit =
-    self ! ()
+    self.!(())
 }
