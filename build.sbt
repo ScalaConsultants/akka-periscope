@@ -3,6 +3,7 @@ import ReleasePlugin.autoImport._
 
 val akkaVersion      = "2.6.4"
 val akkaHttpVersion  = "10.1.11"
+val circeVersion     = "0.13.0"
 val scalaTestVersion = "3.1.1"
 
 val compilerOptions = Seq(
@@ -80,6 +81,7 @@ val root = (project in file("."))
       "com.typesafe.akka" %% "akka-actor"          % akkaVersion,
       "com.typesafe.akka" %% "akka-http"           % akkaHttpVersion,
       "org.scalatest"     %% "scalatest"           % scalaTestVersion % Test,
+      "io.circe"          %% "circe-parser"        % circeVersion % Test,
       "com.typesafe.akka" %% "akka-testkit"        % akkaVersion % Test,
       "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
       "com.typesafe.akka" %% "akka-http-testkit"   % akkaHttpVersion % Test

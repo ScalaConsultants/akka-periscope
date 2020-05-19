@@ -20,7 +20,7 @@ class ActorTreeBuilderSpec
     with ScalaFutures
     with BeforeAndAfterAll {
 
-  override implicit def patienceConfig: PatienceConfig = PatienceConfig(scaled(Span(350, Milliseconds)))
+  override implicit def patienceConfig: PatienceConfig = PatienceConfig(scaled(Span(600, Milliseconds)))
 
   "ActorTreeBuilder" should "build the whole tree if all the actors are responsive" in {
     system.actorOf(Props(new ActorA), "a")

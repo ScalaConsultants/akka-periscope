@@ -5,6 +5,7 @@ import akka.http.scaladsl.model.{ ContentTypes, StatusCodes }
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.testkit.TestKit
+import io.circe.parser._
 import io.scalac.panopticon.akka.ActorA
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.concurrent.ScalaFutures
@@ -24,7 +25,14 @@ class ActorTreeRouteSpec
     Get("/?timeout=300") ~> route ~> check {
       status shouldEqual StatusCodes.OK
       contentType shouldEqual ContentTypes.`application/json`
-      responseAs[String] should include(""""a":{"ab":{"abc1":{},"abc2":{}},"ac":{}}""")
+      parse(responseAs[String])
+        .getOrElse(fail("Invalid json"))
+        .asObject
+        .get("user")
+        .get
+        .asObject
+        .get("a")
+        .get shouldEqual parse("""{"ab":{"abc1":{},"abc2":{}},"ac":{}}""").getOrElse(fail("Invalid json"))
     }
   }
 
