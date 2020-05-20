@@ -27,15 +27,15 @@ lazy val publishSettings = Seq(
   releaseCommitMessage := s"Set version to ${version.value}",
   releaseIgnoreUntrackedFiles := true,
   releaseCrossBuild := true,
-  homepage := Some(url("https://github.com/ScalaConsultants/akka-actor-tree")),
+  homepage := Some(url("https://github.com/ScalaConsultants/akka-periscope")),
   licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT")),
   publishTo := sonatypePublishToBundle.value,
   publishMavenStyle := true,
   publishArtifact in Test := false,
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/ScalaConsultants/akka-actor-tree"),
-      "scm:git:git@github.com:ScalaConsultants/akka-actor-tree.git"
+      url("https://github.com/ScalaConsultants/akka-periscope"),
+      "scm:git:git@github.com:ScalaConsultants/akka-periscope.git"
     )
   ),
   developers := List(
@@ -44,6 +44,12 @@ lazy val publishSettings = Seq(
       name = "Vladimir Pavkin",
       email = "vpavkin@gmail.com",
       url = url("http://pavkin.ru")
+    ),
+    Developer(
+      id = "jczuchnowski",
+      name = "Jakub Czuchnowski",
+      email = "jakub.czuchnowski@gmail.com",
+      url = url("https://github.com/jczuchnowski")
     )
   ),
   releaseProcess := Seq[ReleaseStep](
@@ -65,7 +71,7 @@ lazy val publishSettings = Seq(
 val root = (project in file("."))
   .settings(
     organization := "io.scalac",
-    name := "akka-actor-tree",
+    name := "akka-periscope",
     scalaVersion := "2.13.2",
     crossScalaVersions := Seq("2.12.11", "2.13.2"),
     scalacOptions ++= {
