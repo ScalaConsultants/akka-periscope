@@ -1,8 +1,8 @@
-# akka-actor-tree
+# akka-periscope
 
 ![CI](https://github.com/ScalaConsultants/akka-actor-tree/workflows/Scala%20CI/badge.svg)
 
-Akka actor tree collector plugin.
+Akka diagnostics collector plugin.
 
 Provides akka-related data for [Panopticon monitoring tool](https://github.com/ScalaConsultants/panopticon-tui), but can be used for general purposes as well.
 
