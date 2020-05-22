@@ -1,6 +1,7 @@
 # akka-periscope
 
 ![CI](https://github.com/ScalaConsultants/akka-actor-tree/workflows/Scala%20CI/badge.svg)
+![Maven Central](https://img.shields.io/maven-central/v/io.scalac/akka-periscope_2.13.svg)](https://github.com/ScalaConsultants/akka-periscope)
 
 Akka diagnostics collector plugin.
 
@@ -24,7 +25,7 @@ No, except for (obviously) [akka](https://akka.io/).
 Import the library in your `build.sbt`:
 
 ```
-libraryDependencies += "io.scalac" %% "akka-actor-tree" % "<tbd>"
+libraryDependencies += "io.scalac" %% "akka-actor-tree" % "0.1.0"
 ```
 
 ### Getting raw data
