@@ -1,7 +1,7 @@
 # akka-periscope
 
 ![CI](https://github.com/ScalaConsultants/akka-actor-tree/workflows/Scala%20CI/badge.svg)
-![Maven Central](https://img.shields.io/maven-central/v/io.scalac/akka-periscope_2.13.svg)](https://github.com/ScalaConsultants/akka-periscope)
+![Maven Central](https://img.shields.io/maven-central/v/io.scalac/akka-periscope_2.13.svg)
 
 Akka diagnostics collector plugin.
 
