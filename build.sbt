@@ -120,6 +120,7 @@ val akkaHttp = (project in file("akka-http"))
   .dependsOn(core % "compile->compile;test->test")
 
 val root = (project in file("."))
+  .settings(buildSettings: _*)
   .settings(publishSettings: _*)
   .settings(noPublishSettings: _*)
   .aggregate(core, akkaHttp)
