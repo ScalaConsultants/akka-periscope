@@ -6,7 +6,6 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.testkit.TestKit
 import io.scalac.panopticon.akka.ActorA
-import io.scalac.panopticon.akka.http.ActorCountRoute
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.flatspec.AnyFlatSpec
