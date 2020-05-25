@@ -6,7 +6,8 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.testkit.TestKit
 import io.circe.parser._
-import io.scalac.panopticon.akka.{ ActorA, http }
+import io.scalac.panopticon.akka.ActorA
+import io.scalac.panopticon.akka.http.ActorTreeRoute
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.flatspec.AnyFlatSpec
@@ -37,7 +38,7 @@ class ActorTreeRouteSpec
   }
 
   it should "respond with 404 if no timeout parameter was specified" in {
-    val route = Route.seal(http.ActorTreeRoute(system))
+    val route = Route.seal(ActorTreeRoute(system))
     Get("/") ~> route ~> check {
       status shouldEqual StatusCodes.NotFound
     }

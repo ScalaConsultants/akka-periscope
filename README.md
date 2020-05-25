@@ -84,7 +84,7 @@ If your primary goal is to make [Panopticon](https://github.com/ScalaConsultants
 
 #### Akka-http endpoints
 
-If you use akka-http, then you can add `akka-periscope-akka-http` to your build. After that you create akka-http `Route`s for both actor tree and actor count using these smart-constructors:
+If you use akka-http, then you can add `akka-periscope-akka-http` to your build. After that you can create akka-http `Route`s for both actor tree and actor count using these smart-constructors:
 
 ```scala
 import io.scalac.panopticon.akka.http.ActorTreeRoute

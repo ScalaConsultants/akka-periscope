@@ -86,7 +86,9 @@ val publishSettings = Seq(
 val noPublishSettings = Seq(
   publish := {},
   publishLocal := {},
-  publishArtifact := false
+  publishArtifact := false,
+  publishMavenStyle := true,
+  publishTo := sonatypePublishToBundle.value
 )
 
 val core = (project in file("core"))
