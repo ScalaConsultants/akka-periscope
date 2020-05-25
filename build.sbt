@@ -86,9 +86,7 @@ val publishSettings = Seq(
 val noPublishSettings = Seq(
   publish := {},
   publishLocal := {},
-  publishArtifact := false,
-  publishMavenStyle := true,
-  publishTo := sonatypePublishToBundle.value
+  publishArtifact := false
 )
 
 val core = (project in file("core"))
@@ -122,6 +120,7 @@ val akkaHttp = (project in file("akka-http"))
   .dependsOn(core % "compile->compile;test->test")
 
 val root = (project in file("."))
+  .settings(publishSettings: _*)
   .settings(noPublishSettings: _*)
   .aggregate(core, akkaHttp)
 
