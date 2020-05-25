@@ -1,7 +1,7 @@
 # akka-periscope
 
 ![CI](https://github.com/ScalaConsultants/akka-periscope/workflows/Scala%20CI/badge.svg)
-![Maven Central](https://img.shields.io/maven-central/v/io.scalac/akka-periscope_2.13.svg)
+![Maven Central](https://img.shields.io/maven-central/v/io.scalac/akka-periscope-core_2.13.svg)
 
 Akka diagnostics collector plugin.
 
@@ -25,12 +25,18 @@ No, except for (obviously) [akka](https://akka.io/).
 Import the library in your `build.sbt`:
 
 ```
-libraryDependencies += "io.scalac" %% "akka-periscope" % "0.1.0"
+libraryDependencies += "io.scalac" %% "akka-periscope-core" % "0.2.0"
+```
+
+If you want additional integrations, consider adding one/several of the following:
+
+```
+libraryDependencies += "io.scalac" %% "akka-periscope-akka-http" % "0.2.0"
 ```
 
 ### Getting raw data
 
-If you want to just get the data to use it in some way, there are following two function available.
+If you want to just get the data to use it in some way, there are following two function available in `akka-periscope-core`.
 
 #### Actor tree
 
@@ -78,11 +84,11 @@ If your primary goal is to make [Panopticon](https://github.com/ScalaConsultants
 
 #### Akka-http endpoints
 
-You can create akka-http `Route`s for both actor tree and actor count using these smart-constructors:
+If you use akka-http, then you can add `akka-periscope-akka-http` to your build. After that you can create akka-http `Route`s for both actor tree and actor count using these smart-constructors:
 
 ```scala
-import io.scalac.panopticon.akka.tree.ActorTreeRoute
-import io.scalac.panopticon.akka.counter.ActorCountRoute
+import io.scalac.panopticon.akka.http.ActorTreeRoute
+import io.scalac.panopticon.akka.http.ActorCountRoute
 import akka.actor.ActorSystem
 import akka.http.scaladsl.server.Directives._
 import scala.concurrent.ExecutionContext

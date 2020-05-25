@@ -25,15 +25,13 @@ class ActorCounterSpec
   "ActorCounter" should "count all the actors that are responsive" in {
     system.actorOf(Props(new ActorA), "a")
     implicit val timeout: Timeout = Timeout(300.millis)
-    // user tree (including actor counter itself) + 5 system ones.
-    count(system).futureValue shouldBe 14
+    count(system).futureValue shouldBe 12
   }
 
   it should "provide bounded execution time by not including actors that can't respond in time" in {
     system.actorOf(Props(new OverwhelmedActorParent), "o")
     implicit val timeout: Timeout = Timeout(300.millis)
-    // would add 4 actors (up to 16) if they all were responsive
-    count(system).futureValue shouldBe 17
+    count(system).futureValue shouldBe 15
   }
 
   override def afterAll: Unit =

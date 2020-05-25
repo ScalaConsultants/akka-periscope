@@ -21,7 +21,22 @@ val compilerOptions = Seq(
   "-Ywarn-unused-import"
 )
 
-lazy val publishSettings = Seq(
+val buildSettings = Seq(
+  organization := "io.scalac",
+  scalaVersion := "2.13.2",
+  crossScalaVersions := Seq("2.12.11", "2.13.2"),
+  scalacOptions ++= {
+    if (priorTo2_13(scalaVersion.value)) compilerOptions
+    else
+      compilerOptions.flatMap {
+        case "-Ywarn-unused-import" => Seq("-Ywarn-unused:imports")
+        case "-Xfuture"             => Nil
+        case other                  => Seq(other)
+      }
+  }
+)
+
+val publishSettings = Seq(
   releaseUseGlobalVersion := true,
   releaseVersionFile := file(".") / "version.sbt",
   releaseCommitMessage := s"Set version to ${version.value}",
@@ -68,21 +83,31 @@ lazy val publishSettings = Seq(
   )
 )
 
-val root = (project in file("."))
+val noPublishSettings = Seq(
+  publish := {},
+  publishLocal := {},
+  publishArtifact := false,
+  publishMavenStyle := true,
+  publishTo := sonatypePublishToBundle.value
+)
+
+val core = (project in file("core"))
+  .settings(buildSettings: _*)
   .settings(
-    organization := "io.scalac",
-    name := "akka-periscope",
-    scalaVersion := "2.13.2",
-    crossScalaVersions := Seq("2.12.11", "2.13.2"),
-    scalacOptions ++= {
-      if (priorTo2_13(scalaVersion.value)) compilerOptions
-      else
-        compilerOptions.flatMap {
-          case "-Ywarn-unused-import" => Seq("-Ywarn-unused:imports")
-          case "-Xfuture"             => Nil
-          case other                  => Seq(other)
-        }
-    },
+    name := "akka-periscope-core",
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-actor"   % akkaVersion,
+      "org.scalatest"     %% "scalatest"    % scalaTestVersion % Test,
+      "io.circe"          %% "circe-parser" % circeVersion % Test,
+      "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test
+    )
+  )
+  .settings(publishSettings: _*)
+
+val akkaHttp = (project in file("akka-http"))
+  .settings(buildSettings: _*)
+  .settings(
+    name := "akka-periscope-akka-http",
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor"          % akkaVersion,
       "com.typesafe.akka" %% "akka-http"           % akkaHttpVersion,
@@ -94,6 +119,11 @@ val root = (project in file("."))
     )
   )
   .settings(publishSettings: _*)
+  .dependsOn(core % "compile->compile;test->test")
+
+val root = (project in file("."))
+  .settings(noPublishSettings: _*)
+  .aggregate(core, akkaHttp)
 
 def priorTo2_13(scalaVersion: String): Boolean =
   CrossVersion.partialVersion(scalaVersion) match {
