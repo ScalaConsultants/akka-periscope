@@ -1,4 +1,4 @@
-package io.scalac.panopticon.akka.tree
+package io.scalac.periscope.akka.tree
 
 final case class ActorTree(nodes: Map[String, ActorTree]) extends AnyVal {
 

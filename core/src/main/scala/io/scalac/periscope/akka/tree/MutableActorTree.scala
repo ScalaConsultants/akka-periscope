@@ -1,4 +1,4 @@
-package io.scalac.panopticon.akka.tree
+package io.scalac.periscope.akka.tree
 
 import akka.actor.ActorPath
 

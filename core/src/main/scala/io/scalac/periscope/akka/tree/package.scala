@@ -1,4 +1,4 @@
-package io.scalac.panopticon.akka
+package io.scalac.periscope.akka
 
 import java.time.Instant
 
@@ -10,7 +10,7 @@ import scala.concurrent.{ ExecutionContext, Future }
 
 package object tree {
 
-  import io.scalac.panopticon.akka.tree.ActorTreeBuilder._
+  import io.scalac.periscope.akka.tree.ActorTreeBuilder._
 
   def build(system: ActorSystem)(implicit ec: ExecutionContext, timeout: Timeout): Future[ActorTree] = {
     val correlation = Instant.now().toEpochMilli

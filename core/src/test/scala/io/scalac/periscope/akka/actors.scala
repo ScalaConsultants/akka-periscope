@@ -1,4 +1,4 @@
-package io.scalac.panopticon.akka
+package io.scalac.periscope.akka
 
 import akka.actor.{ Actor, Props }
 

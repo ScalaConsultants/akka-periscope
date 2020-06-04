@@ -1,4 +1,4 @@
-package io.scalac.panopticon.akka.counter
+package io.scalac.periscope.akka.counter
 
 import akka.actor.{ Actor, ActorIdentity, Identify }
 import ActorCounter._

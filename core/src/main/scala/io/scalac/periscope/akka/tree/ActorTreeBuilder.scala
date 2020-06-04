@@ -1,7 +1,7 @@
-package io.scalac.panopticon.akka.tree
+package io.scalac.periscope.akka.tree
 
 import akka.actor.{ Actor, ActorIdentity, Identify }
-import io.scalac.panopticon.akka.tree.ActorTreeBuilder.{ AlreadyBuilding, Build, GetTree }
+import io.scalac.periscope.akka.tree.ActorTreeBuilder.{ AlreadyBuilding, Build, GetTree }
 
 import scala.collection.mutable
 

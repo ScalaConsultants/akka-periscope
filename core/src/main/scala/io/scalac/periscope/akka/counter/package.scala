@@ -1,4 +1,4 @@
-package io.scalac.panopticon.akka
+package io.scalac.periscope.akka
 
 import java.time.Instant
 
@@ -10,7 +10,7 @@ import scala.concurrent.{ ExecutionContext, Future }
 
 package object counter {
 
-  import io.scalac.panopticon.akka.counter.ActorCounter._
+  import io.scalac.periscope.akka.counter.ActorCounter._
 
   def count(system: ActorSystem)(implicit ec: ExecutionContext, timeout: Timeout): Future[Long] = {
     val correlation = Instant.now().toEpochMilli

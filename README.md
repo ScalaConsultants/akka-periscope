@@ -46,8 +46,8 @@ import akka.actor.ActorSystem
 import akka.util.Timeout
 import scala.concurrent.{Future, ExecutionContext}
 
-import io.scalac.panopticon.akka.tree.build
-import io.scalac.panopticon.akka.tree.ActorTree
+import io.scalac.periscope.akka.tree.build
+import io.scalac.periscope.akka.tree.ActorTree
 
 val system: ActorSystem = ???
 implicit val timeout: Timeout = ??? // time limit for the tree to be assembled
@@ -67,7 +67,7 @@ import akka.actor.ActorSystem
 import akka.util.Timeout
 import scala.concurrent.{Future, ExecutionContext}
 
-import io.scalac.panopticon.akka.counter.count
+import io.scalac.periscope.akka.counter.count
 
 val system: ActorSystem = ???
 implicit val timeout: Timeout = ??? // time limit for the actor hierarchy to be processed
@@ -87,8 +87,8 @@ If your primary goal is to make [Panopticon](https://github.com/ScalaConsultants
 If you use akka-http, then you can add `akka-periscope-akka-http` to your build. After that you can create akka-http `Route`s for both actor tree and actor count using these smart-constructors:
 
 ```scala
-import io.scalac.panopticon.akka.http.ActorTreeRoute
-import io.scalac.panopticon.akka.http.ActorCountRoute
+import io.scalac.periscope.akka.http.ActorTreeRoute
+import io.scalac.periscope.akka.http.ActorCountRoute
 import akka.actor.ActorSystem
 import akka.http.scaladsl.server.Directives._
 import scala.concurrent.ExecutionContext
