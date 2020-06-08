@@ -5,6 +5,10 @@ final case class WindowSnapshot(
   deadLetters: WindowData,
   unhandled: WindowData,
   dropped: WindowData
-)
+){
+  def toJson = s"""{"withinMillis":$withinMillis,"deadLetters":${deadLetters.toJson},"unhandled":${unhandled.toJson},"dropped":${dropped.toJson}}"""
+}
 
-final case class WindowData(count: Int, isMinimumEstimate: Boolean)
+final case class WindowData(count: Int, isMinimumEstimate: Boolean) {
+  def toJson = s"""{"count":$count,"isMinimumEstimate":$isMinimumEstimate}"""
+}
