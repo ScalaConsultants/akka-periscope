@@ -53,21 +53,7 @@ private[deadletters] abstract class AbstractDeadLettersDataCollector(keepMax: In
 object AbstractDeadLettersDataCollector {
 
   final case object GetSnapshot
-  final case class Snapshot(
-    deadLetters: Vector[Timestamped[DeadLetter]],
-    unhandled: Vector[Timestamped[UnhandledMessage]],
-    dropped: Vector[Timestamped[Dropped]]
-  )
 
   final case class CalculateForWindow(withinMillis: Long)
-
-  final case class WindowSnapshot(
-    withinMillis: Long,
-    deadLetters: WindowData,
-    unhandled: WindowData,
-    dropped: WindowData
-  )
-
-  final case class WindowData(count: Int, isMinimumEstimate: Boolean)
 
 }
