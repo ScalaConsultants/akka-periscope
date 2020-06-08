@@ -3,17 +3,16 @@ package io.scalac.periscope.akka.deadletters
 import java.time.Instant
 
 import akka.actor.{ Actor, DeadLetter, Dropped, UnhandledMessage }
-import io.scalac.periscope.akka.deadletters.DeadLettersDataCollector._
+import io.scalac.periscope.akka.deadletters.AbstractDeadLettersDataCollector._
+import io.scalac.periscope.common.Deque
 
-import scala.collection.mutable
-
-private[deadletters] class DeadLettersDataCollector(keepMax: Int) extends Actor {
+private[deadletters] abstract class AbstractDeadLettersDataCollector(keepMax: Int) extends Actor {
 
   private val eventStream = context.system.eventStream
 
-  private val lastDeadLetters: mutable.ArrayDeque[Timestamped[DeadLetter]]     = new mutable.ArrayDeque(keepMax)
-  private val lastUnhandled: mutable.ArrayDeque[Timestamped[UnhandledMessage]] = new mutable.ArrayDeque(keepMax)
-  private val lastDropped: mutable.ArrayDeque[Timestamped[Dropped]]            = new mutable.ArrayDeque(keepMax)
+  protected def lastDeadLetters: Deque[Timestamped[DeadLetter]]
+  protected def lastUnhandled: Deque[Timestamped[UnhandledMessage]]
+  protected def lastDropped: Deque[Timestamped[Dropped]]
 
   override def preStart(): Unit = {
     super.preStart()
@@ -43,27 +42,27 @@ private[deadletters] class DeadLettersDataCollector(keepMax: Int) extends Actor 
 
   }
 
-  private def enqueueAndKeepSize[A](queue: mutable.ArrayDeque[Timestamped[A]], message: A) = {
+  private def enqueueAndKeepSize[A](queue: Deque[Timestamped[A]], message: A) = {
     if (queue.size == keepMax) {
-      queue.removeLast()
+      queue.removeLast
     }
     queue.prepend(Timestamped(message, Instant.now.toEpochMilli))
   }
 
-  private def windowData[A](queue: mutable.ArrayDeque[Timestamped[A]], from: Long): WindowData = {
+  private def windowData[A](queue: Deque[Timestamped[A]], from: Long): WindowData = {
     val isFullWindow = containsWholeWindow(queue, from)
     val count        = countWindow(queue, from)
     WindowData(count, !isFullWindow)
   }
 
-  private def containsWholeWindow[A](queue: mutable.ArrayDeque[Timestamped[A]], from: Long) =
+  private def containsWholeWindow[A](queue: Deque[Timestamped[A]], from: Long) =
     queue.lastOption.fold(true)(_.timestamp <= from)
 
-  private def countWindow[A](queue: mutable.ArrayDeque[Timestamped[A]], from: Long): Int =
+  private def countWindow[A](queue: Deque[Timestamped[A]], from: Long): Int =
     queue.count(_.timestamp >= from)
 }
 
-object DeadLettersDataCollector {
+object AbstractDeadLettersDataCollector {
 
   final case object GetSnapshot
   final case class Snapshot(
