@@ -3,7 +3,9 @@ package io.scalac.periscope.akka
 import akka.actor.{ Actor, Props }
 
 class ActorA extends Actor {
-  def receive: Receive = PartialFunction.empty
+  def receive: Receive = {
+    case _: KnownMessage => ()
+  }
   override def preStart(): Unit = {
     context.actorOf(Props(new ActorB), name = "ab")
     context.actorOf(Props(new ActorC), name = "ac")
@@ -42,3 +44,6 @@ class OverwhelmedActor extends Actor {
   override def preStart(): Unit =
     self.!(())
 }
+
+final case class KnownMessage(text: String)
+final case class UnknownMessage(text: String)
