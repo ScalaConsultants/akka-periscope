@@ -8,21 +8,9 @@ import io.scalac.periscope.common.Deque
 
 private[deadletters] abstract class AbstractDeadLettersDataCollector(keepMax: Int) extends Actor {
 
-  private val eventStream = context.system.eventStream
-
   protected def lastDeadLetters: Deque[Timestamped[DeadLetter]]
   protected def lastUnhandled: Deque[Timestamped[UnhandledMessage]]
   protected def lastDropped: Deque[Timestamped[Dropped]]
-
-  override def preStart(): Unit = {
-    super.preStart()
-    eventStream.subscribe(self, classOf[DeadLetter])
-    eventStream.subscribe(self, classOf[UnhandledMessage])
-    eventStream.subscribe(self, classOf[Dropped])
-  }
-
-  override def postStop(): Unit =
-    eventStream.unsubscribe(self)
 
   def receive: Receive = {
     case m: DeadLetter       => enqueueAndKeepSize(lastDeadLetters, m)
@@ -42,7 +30,7 @@ private[deadletters] abstract class AbstractDeadLettersDataCollector(keepMax: In
 
   }
 
-  private def enqueueAndKeepSize[A](queue: Deque[Timestamped[A]], message: A) = {
+  private def enqueueAndKeepSize[A](queue: Deque[Timestamped[A]], message: A): Unit = {
     if (queue.size == keepMax) {
       queue.removeLast
     }
