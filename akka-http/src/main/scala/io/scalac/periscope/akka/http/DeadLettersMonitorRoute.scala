@@ -14,7 +14,7 @@ import scala.concurrent.duration._
 object DeadLettersMonitorRoute {
 
   def apply(
-    keepMax: Int = 1000,
+    keepMax: Int = 100,
     timeout: Timeout = Timeout(1.second),
     name: String = "DeadLettersMonitor"
   )(implicit system: ActorSystem, ec: ExecutionContext): Route = {
