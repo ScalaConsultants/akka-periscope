@@ -25,13 +25,13 @@ No, except for (obviously) [akka](https://akka.io/).
 Import the library in your `build.sbt`:
 
 ```
-libraryDependencies += "io.scalac" %% "akka-periscope-core" % "0.2.0"
+libraryDependencies += "io.scalac" %% "akka-periscope-core" % "0.4.0"
 ```
 
 If you want additional integrations, consider adding one/several of the following:
 
 ```
-libraryDependencies += "io.scalac" %% "akka-periscope-akka-http" % "0.2.0"
+libraryDependencies += "io.scalac" %% "akka-periscope-akka-http" % "0.4.0"
 ```
 
 ### Getting raw data
