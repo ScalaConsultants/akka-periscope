@@ -12,14 +12,16 @@ import io.scalac.periscope.akka.counter.count
 
 import scala.concurrent.{ ExecutionContext, Future }
 
-object ActorCountRoute {
+object ActorSystemStatusRoute {
 
   private def countFor(system: ActorSystem, timeoutMs: Long)(implicit ec: ExecutionContext): Future[HttpResponse] = {
     implicit val timeout: Timeout = Timeout(timeoutMs, TimeUnit.MILLISECONDS)
     count(system).map(res =>
       HttpResponse(
         StatusCodes.OK,
-        entity = HttpEntity(s"""{"result":$res}""").withContentType(`application/json`)
+        entity = HttpEntity(
+          s"""{"actorCount":$res,"uptime":${system.uptime},"startTime":${system.startTime}}"""
+        ).withContentType(`application/json`)
       )
     )
   }
