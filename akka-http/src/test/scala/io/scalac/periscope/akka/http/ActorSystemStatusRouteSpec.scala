@@ -26,7 +26,7 @@ class ActorSystemStatusRouteSpec
       status shouldEqual StatusCodes.OK
       contentType shouldEqual ContentTypes.`application/json`
       val respBody = parse(responseAs[String]).getOrElse(fail("Invalid json")).hcursor
-      respBody.downField("actorCount").as[Long] shouldBe Right(14L)
+      respBody.downField("actorCount").as[Long] shouldBe Right(13L)
       respBody.downField("startTime").as[Long].isRight shouldBe true
       respBody.downField("uptime").as[Long].isRight shouldBe true
     }
