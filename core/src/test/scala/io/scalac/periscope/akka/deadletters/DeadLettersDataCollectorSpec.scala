@@ -69,12 +69,11 @@ class DeadLettersDataCollectorSpec
     eventually {
       val window   = (collector ? CalculateForWindow(withinTime.toMillis * 2)).mapTo[WindowSnapshot].futureValue
       val snapshot = (collector ? GetSnapshot).mapTo[Snapshot].futureValue
-      inside(snapshot.unhandled) {
-        case Vector(m1, m2, m3) =>
-          // reverse order - latest first
-          m1.value.message shouldBe UnknownMessage("Luke, I'm your father!")
-          m2.value.message shouldBe UnknownMessage("Something is wrong")
-          m3.value.message shouldBe UnknownMessage("am I?")
+      inside(snapshot.unhandled) { case Vector(m1, m2, m3) =>
+        // reverse order - latest first
+        m1.value.message shouldBe UnknownMessage("Luke, I'm your father!")
+        m2.value.message shouldBe UnknownMessage("Something is wrong")
+        m3.value.message shouldBe UnknownMessage("am I?")
       }
       snapshot.deadLetters should be(empty)
       snapshot.dropped should be(empty)
@@ -170,8 +169,7 @@ class DeadLettersDataCollectorSpec
 }
 
 class BoundedActor extends Actor with RequiresMessageQueue[BoundedMessageQueueSemantics] {
-  def receive: Receive = {
-    case _ =>
-      Thread.sleep(3000)
+  def receive: Receive = { case _ =>
+    Thread.sleep(3000)
   }
 }

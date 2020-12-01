@@ -21,9 +21,8 @@ final case class ActorTree(nodes: Map[String, ActorTree]) extends AnyVal {
     if (nodes.isEmpty) "{}"
     else
       nodes
-        .foldLeft("{") {
-          case (agg, (actor, children)) =>
-            s"""$agg"$actor":${children.asJson},"""
+        .foldLeft("{") { case (agg, (actor, children)) =>
+          s"""$agg"$actor":${children.asJson},"""
         }
         .init + "}"
 }

@@ -9,7 +9,7 @@ class ActorTreeSpec extends AnyFlatSpec with Matchers {
 
     val tree = ActorTree(
       Map(
-        "user" -> ActorTree(Map("a" -> ActorTree(Map("b" -> ActorTree(Map("c" -> ActorTree(Map.empty))))))),
+        "user"   -> ActorTree(Map("a" -> ActorTree(Map("b" -> ActorTree(Map("c" -> ActorTree(Map.empty))))))),
         "system" -> ActorTree(
           Map(
             "a" -> ActorTree(Map()),

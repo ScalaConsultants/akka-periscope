@@ -14,12 +14,12 @@ package object tree {
 
   def build(system: ActorSystem)(implicit ec: ExecutionContext, timeout: Timeout): Future[ActorTree] = {
     val correlation = Instant.now().toEpochMilli
-    val builder = system.actorOf(
+    val builder     = system.actorOf(
       Props(new ActorTreeBuilder(correlation)),
       s"actor-tree-builder-$correlation"
     )
     builder ! Build
-    val result = after(timeout.duration, system.scheduler)((builder ? GetTree).mapTo[ActorTree])
+    val result      = after(timeout.duration, system.scheduler)((builder ? GetTree).mapTo[ActorTree])
     result.onComplete(_ => system.stop(builder))
     result
   }
