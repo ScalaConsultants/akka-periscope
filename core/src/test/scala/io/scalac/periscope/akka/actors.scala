@@ -3,8 +3,8 @@ package io.scalac.periscope.akka
 import akka.actor.{ Actor, Props }
 
 class ActorA extends Actor {
-  def receive: Receive = {
-    case _: KnownMessage => ()
+  def receive: Receive = { case _: KnownMessage =>
+    ()
   }
   override def preStart(): Unit = {
     context.actorOf(Props(new ActorB), name = "ab")
@@ -38,8 +38,8 @@ class OverwhelmedActorParent extends Actor {
 }
 
 class OverwhelmedActor extends Actor {
-  def receive: Receive = {
-    case () => Thread.sleep(5000)
+  def receive: Receive          = { case () =>
+    Thread.sleep(5000)
   }
   override def preStart(): Unit =
     self.!(())

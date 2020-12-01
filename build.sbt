@@ -96,8 +96,8 @@ val core = (project in file("core"))
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor"   % akkaVersion,
       "org.scalatest"     %% "scalatest"    % scalaTestVersion % Test,
-      "io.circe"          %% "circe-parser" % circeVersion % Test,
-      "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test
+      "io.circe"          %% "circe-parser" % circeVersion     % Test,
+      "com.typesafe.akka" %% "akka-testkit" % akkaVersion      % Test
     )
   )
   .settings(publishSettings: _*)
@@ -110,16 +110,16 @@ val akkaHttp = (project in file("akka-http"))
       "com.typesafe.akka" %% "akka-actor"          % akkaVersion,
       "com.typesafe.akka" %% "akka-http"           % akkaHttpVersion,
       "org.scalatest"     %% "scalatest"           % scalaTestVersion % Test,
-      "io.circe"          %% "circe-parser"        % circeVersion % Test,
-      "com.typesafe.akka" %% "akka-testkit"        % akkaVersion % Test,
-      "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
-      "com.typesafe.akka" %% "akka-http-testkit"   % akkaHttpVersion % Test
+      "io.circe"          %% "circe-parser"        % circeVersion     % Test,
+      "com.typesafe.akka" %% "akka-testkit"        % akkaVersion      % Test,
+      "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion      % Test,
+      "com.typesafe.akka" %% "akka-http-testkit"   % akkaHttpVersion  % Test
     )
   )
   .settings(publishSettings: _*)
   .dependsOn(core % "compile->compile;test->test")
 
-val root = (project in file("."))
+val root     = (project in file("."))
   .settings(buildSettings: _*)
   .settings(publishSettings: _*)
   .settings(noPublishSettings: _*)

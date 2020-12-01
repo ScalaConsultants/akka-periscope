@@ -23,11 +23,9 @@ object Snapshot {
   private def vectorToJson[A](v: Vector[Timestamped[A]], atoj: A => String) =
     if (v.isEmpty) "[]"
     else
-      v.foldLeft("[") {
-          case (agg, i) =>
-            s"""$agg{"timestamp":${i.timestamp},"value":${atoj(i.value)}},"""
-        }
-        .init + "]"
+      v.foldLeft("[") { case (agg, i) =>
+        s"""$agg{"timestamp":${i.timestamp},"value":${atoj(i.value)}},"""
+      }.init + "]"
 
   private def deadLetterToJson(a: DeadLetter) =
     s"""{"message":"${json.escape(a.message.toString)}","sender":"${a.sender.toString()}","recipient":"${a.recipient

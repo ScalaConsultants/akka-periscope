@@ -126,7 +126,9 @@ class DeadLettersMonitorRouteSpec
         val json = parse(responseAs[String]).getOrElse(fail("Invalid json"))
 
         val unhandled = json.hcursor.downField("snapshot").downField("unhandled")
-        unhandled.downArray.downField("value").downField("message").as[String] shouldBe Right("UnknownMessage(\"this\\\"is a \"\\\" tough message)")
+        unhandled.downArray.downField("value").downField("message").as[String] shouldBe Right(
+          "UnknownMessage(\"this\\\"is a \"\\\" tough message)"
+        )
       }
     )
   }

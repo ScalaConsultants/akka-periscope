@@ -5,13 +5,13 @@ import io.scalac.periscope.common.{ ArrayDeque, Deque }
 
 private[deadletters] class DeadLettersDataCollector(keepMax: Int) extends AbstractDeadLettersDataCollector(keepMax) {
 
-  override protected val lastDeadLetters: Deque[Timestamped[DeadLetter]] = ArrayDeque(
+  override protected val lastDeadLetters: Deque[Timestamped[DeadLetter]]     = ArrayDeque(
     new scala.collection.mutable.ArrayDeque(keepMax)
   )
   override protected val lastUnhandled: Deque[Timestamped[UnhandledMessage]] = ArrayDeque(
     new scala.collection.mutable.ArrayDeque(keepMax)
   )
-  override protected val lastDropped: Deque[Timestamped[Dropped]] = ArrayDeque(
+  override protected val lastDropped: Deque[Timestamped[Dropped]]            = ArrayDeque(
     new scala.collection.mutable.ArrayDeque(keepMax)
   )
 }

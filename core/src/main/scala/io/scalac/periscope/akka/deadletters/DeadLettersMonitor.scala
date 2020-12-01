@@ -14,8 +14,8 @@ trait DeadLettersMonitor {
 }
 
 object DeadLettersMonitor {
-  def start(keepMax: Int, name: String = "DeadLettersMonitor")(
-    implicit system: ActorSystem,
+  def start(keepMax: Int, name: String = "DeadLettersMonitor")(implicit
+    system: ActorSystem,
     timeout: Timeout
   ): DeadLettersMonitor = {
     val collector = system.actorOf(Props(new DeadLettersDataCollector(keepMax)), name)
