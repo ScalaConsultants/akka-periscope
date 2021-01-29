@@ -1,7 +1,7 @@
 import ReleaseTransformations._
 import ReleasePlugin.autoImport._
 
-val akkaVersion      = "2.6.5"
+val akkaVersion      = "2.6.12"
 val akkaHttpVersion  = "10.1.12"
 val circeVersion     = "0.13.0"
 val scalaTestVersion = "3.1.1"
