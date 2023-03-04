@@ -3,7 +3,7 @@ import ReleasePlugin.autoImport._
 
 val akkaVersion      = "2.6.5"
 val akkaHttpVersion  = "10.1.12"
-val circeVersion     = "0.13.0"
+val circeVersion     = "0.14.5"
 val scalaTestVersion = "3.1.1"
 
 val compilerOptions = Seq(
