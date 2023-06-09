@@ -23,8 +23,8 @@ val compilerOptions = Seq(
 
 val buildSettings = Seq(
   organization := "io.scalac",
-  scalaVersion := "2.13.2",
-  crossScalaVersions := Seq("2.12.11", "2.13.2"),
+  scalaVersion := "2.13.11",
+  crossScalaVersions := Seq("2.12.11", "2.13.11"),
   scalacOptions ++= {
     if (priorTo2_13(scalaVersion.value)) compilerOptions
     else
